@@ -1,1 +1,70 @@
-http://swiftstub.com/289770280
+class CFlashCard{
+    enum typeOfTips
+    {
+        case Text(text: String)
+        case Imagine(text: String)
+        case Sound(text: String)
+    }
+    let polish:String
+    let english:String
+    var lernedTo:Bool
+    var tips:[typeOfTips]
+    
+    init(polish:String, english:String, tips:typeOfTips... )
+    {
+        self.polish = polish
+        self.english = english
+        self.lernedTo = false
+        self.tips = tips
+    }
+    
+    func description()->String
+    {
+        var returnStr = self.polish + " -> " + self.english + " ["
+        
+        for (index, typ) in self.tips.enumerate(){
+            switch typ
+            {
+                case .Text(let value):
+                    returnStr += value
+                case .Imagine(let value):
+                    returnStr += value
+                case .Sound(let value):
+                    returnStr += value
+                default :
+                    print("something went wrong")
+            }
+             if index < (self.tips.count-1)
+            {
+                returnStr += ", "
+            }
+            else
+            {
+                returnStr += "]"
+            }
+        }
+        return returnStr
+    }
+    
+    func taughtChange()
+    {
+        self.lernedTo = !self.lernedTo
+    }
+    
+    func taught()-> Bool
+    {
+        return self.lernedTo;
+    }
+}
+
+    let Card = CFlashCard(polish:"zielony", english:"green", tips: .Text(text:"color of the grass"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    Card.taughtChange();
+    
+    print("He/She lerned to: \(Card.taught())")
+    
+    let f = Card.description();
+    
+    print(f)
+
+
+

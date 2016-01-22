@@ -1,1 +1,103 @@
-http://swiftstub.com/761416208
+protocol Learn{
+    var canBeLearn:Bool { get set }
+}
+
+class CFlashCard:Learn
+{
+    var canBeLearn:Bool
+    var lernedTo:Bool
+    
+    enum typeOfTips
+    {
+        case Text(text: String)
+        case Imagine(text: String)
+        case Sound(text: String)
+    }
+    let polish:String
+    let english:String
+    var tips:[typeOfTips]
+    
+    init(polish:String, english:String, tips:typeOfTips... )
+    {
+        self.polish = polish
+        self.english = english
+        self.canBeLearn = true
+        self.lernedTo = false
+        self.tips = tips
+    }
+    
+    func description()->String
+    {
+        var returnStr = self.polish + " -> " + self.english + " ["
+        
+        for (index, typ) in self.tips.enumerate(){
+            switch typ
+            {
+                case .Text(let value):
+                    returnStr += value
+                case .Imagine(let value):
+                    returnStr += value
+                case .Sound(let value):
+                    returnStr += value
+                default :
+                    print("something went wrong")
+            }
+             if index < (self.tips.count-1)
+            {
+                returnStr += ", "
+            }
+            else
+            {
+                returnStr += "]"
+            }
+        }
+        return returnStr
+    }
+    func taughtChange()
+    {
+        self.lernedTo = !self.lernedTo
+    }
+}
+
+func CreationListToLearn(words: [CFlashCard])->[CFlashCard]
+{
+    var List = [CFlashCard]()
+    for w in words
+    {
+        if w.lernedTo == false
+        {
+            List.append(w)
+        }
+    }
+    return List
+}
+
+func WordsToLearn(list: [CFlashCard])
+{
+    for w in list
+    {
+        if w.lernedTo == false
+        {
+            print(w.polish)
+        }
+    }
+}
+
+    let Red = CFlashCard(polish:"czerwony", english:"red", tips: .Text(text:"color of the apple"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    let Green = CFlashCard(polish:"zielony", english:"green", tips: .Text(text:"color of the grass"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    let Blue = CFlashCard(polish:"niebieski", english:"blue", tips: .Text(text:"color of the sky"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    let White = CFlashCard(polish:"biały", english:"White", tips: .Text(text:"color of the milk"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    
+    Green.taughtChange()
+    
+    var List = [Red, Green, Blue, White]
+    
+    WordsToLearn(List);
+    
+    
+    
+    
+    
+    
+
+

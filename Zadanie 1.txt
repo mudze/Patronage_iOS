@@ -1,1 +1,40 @@
-http://swiftstub.com/256133663/
+class CFlashCard{
+    let polish:String
+    let english:String
+    var taught:Bool
+    var tips:[String]
+    
+    init(polish:String, english:String, tips:String... )
+    {
+        self.polish = polish
+        self.english = english
+        self.taught = false
+        self.tips = tips
+    }
+    
+    func description()->String
+    {
+        var returnStr = self.polish + " -> " + self.english + " ["
+        
+        for (index, str) in self.tips.enumerate()
+        {
+            if index < (self.tips.count-1)
+            {
+                returnStr += str + ", "
+            }
+            else
+            {
+                returnStr += str + "]"
+            }
+        }
+        return returnStr
+    }
+}
+
+
+    let Card = CFlashCard(polish:"zielony", english:"green", tips: "color trawy", "color of the grass")
+    
+    let f = Card.description();
+    
+    print(f)
+    
