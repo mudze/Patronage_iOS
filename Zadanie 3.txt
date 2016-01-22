@@ -1,28 +1,26 @@
-protocol Learn{
-    var canBeLearn:Bool { get set }
+﻿protocol Learn{
+    var taught:Bool { get set }
 }
 
-class CFlashCard:Learn
+class FlashCard:Learn
 {
-    var canBeLearn:Bool
-    var lernedTo:Bool
+    var taught:Bool
     
-    enum typeOfTips
+    enum TypeOfTips
     {
-        case Text(text: String)
-        case Imagine(text: String)
-        case Sound(text: String)
+        case text(text: String)
+        case imagine(text: String)
+        case sound(text: String)
     }
     let polish:String
     let english:String
-    var tips:[typeOfTips]
+    var tips:[TypeOfTips]
     
-    init(polish:String, english:String, tips:typeOfTips... )
+    init(polish:String, english:String, tips:TypeOfTips... )
     {
         self.polish = polish
         self.english = english
-        self.canBeLearn = true
-        self.lernedTo = false
+        self.taught = false
         self.tips = tips
     }
     
@@ -33,11 +31,11 @@ class CFlashCard:Learn
         for (index, typ) in self.tips.enumerate(){
             switch typ
             {
-                case .Text(let value):
+                case .text(let value):
                     returnStr += value
-                case .Imagine(let value):
+                case .imagine(let value):
                     returnStr += value
-                case .Sound(let value):
+                case .sound(let value):
                     returnStr += value
                 default :
                     print("something went wrong")
@@ -55,49 +53,42 @@ class CFlashCard:Learn
     }
     func taughtChange()
     {
-        self.lernedTo = !self.lernedTo
+        self.taught = !self.taught
     }
 }
 
-func CreationListToLearn(words: [CFlashCard])->[CFlashCard]
+func creationListToLearn(words: [FlashCard])->[FlashCard]
 {
-    var List = [CFlashCard]()
+    var list = [FlashCard]()
     for w in words
     {
-        if w.lernedTo == false
+        if w.taught == false
         {
-            List.append(w)
+            list.append(w)
         }
     }
-    return List
+    return list
 }
 
-func WordsToLearn(list: [CFlashCard])
+func wordsToLearn(list: [FlashCard])
 {
     for w in list
     {
-        if w.lernedTo == false
+        if w.taught == false
         {
             print(w.polish)
         }
     }
 }
 
-    let Red = CFlashCard(polish:"czerwony", english:"red", tips: .Text(text:"color of the apple"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
-    let Green = CFlashCard(polish:"zielony", english:"green", tips: .Text(text:"color of the grass"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
-    let Blue = CFlashCard(polish:"niebieski", english:"blue", tips: .Text(text:"color of the sky"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
-    let White = CFlashCard(polish:"biały", english:"White", tips: .Text(text:"color of the milk"), .Sound(text:"sound link"), .Imagine(text:"imagine link"))
+    let red = FlashCard(polish:"czerwony", english:"red", tips: .text(text:"color of the apple"), .sound(text:"sound link"), .imagine(text:"imagine link"))
+    let green = FlashCard(polish:"zielony", english:"green", tips: .text(text:"color of the grass"), .sound(text:"sound link"), .imagine(text:"imagine link"))
+    let blue = FlashCard(polish:"niebieski", english:"blue", tips: .text(text:"color of the sky"), .sound(text:"sound link"), .imagine(text:"imagine link"))
+    let white = FlashCard(polish:"biały", english:"White", tips: .text(text:"color of the milk"), .sound(text:"sound link"), .imagine(text:"imagine link"))
     
-    Green.taughtChange()
+    green.taughtChange()
     
-    var List = [Red, Green, Blue, White]
+    var list = [red, green, blue, white]
     
-    WordsToLearn(List);
+    wordsToLearn(list);
     
-    
-    
-    
-    
-    
-
-

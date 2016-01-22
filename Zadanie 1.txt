@@ -1,4 +1,4 @@
-class CFlashCard{
+class FlashCard{
     let polish:String
     let english:String
     var taught:Bool
@@ -32,9 +32,9 @@ class CFlashCard{
 }
 
 
-    let Card = CFlashCard(polish:"zielony", english:"green", tips: "color trawy", "color of the grass")
+    let card = FlashCard(polish:"zielony", english:"green", tips: "color trawy", "color of the grass")
     
-    let f = Card.description();
+    let f = card.description();
     
     print(f)
     
