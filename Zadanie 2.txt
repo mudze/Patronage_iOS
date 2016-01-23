@@ -5,6 +5,18 @@ class FlashCard{
         case imagine(text: String)
         case sound(text: String)
         
+        func descriptionTips()->String
+        {
+            switch self
+            {
+                case .text(let value):
+                    return value
+                case .imagine(let value):
+                    return value
+                case .sound(let value):
+                    return value
+            }
+        }
     }
     let polish:String
     let english:String
@@ -23,25 +35,15 @@ class FlashCard{
     {
         var string = self.polish + " -> " + self.english + " ["
         
-        for (index, typ) in self.tips.enumerate(){
-            switch typ
-            {
-                case .text(let value):
-                    string += value
-                case .imagine(let value):
-                    string += value
-                case .sound(let value):
-                    string += value
-                default :
-                    print("something went wrong")
-            }
+        for (index, loopTips) in self.tips.enumerate(){
+            
              if index < (self.tips.count-1)
             {
-                string += ", "
+                string += loopTips.descriptionTips() +  ", "
             }
             else
             {
-                string += "]"
+                string += loopTips.descriptionTips() + "]"
             }
         }
         return string
@@ -66,3 +68,6 @@ class FlashCard{
     let f = card.description();
     
     print(f)
+
+
+
