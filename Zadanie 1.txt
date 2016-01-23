@@ -1,4 +1,4 @@
-class FlashCard{
+class FlashCard : CustomStringConvertible{
     let polish:String
     let english:String
     var taught:Bool
@@ -12,7 +12,7 @@ class FlashCard{
         self.tips = tips
     }
     
-    func description()->String
+    var description: String
     {
         var returnStr = self.polish + " -> " + self.english + " ["
         
@@ -34,7 +34,7 @@ class FlashCard{
 
     let card = FlashCard(polish:"zielony", english:"green", tips: "color trawy", "color of the grass")
     
-    let f = card.description();
+    let f = card.description;
     
     print(f)
     
